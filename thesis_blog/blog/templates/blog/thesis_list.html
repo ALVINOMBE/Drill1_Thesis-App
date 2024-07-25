@@ -1,0 +1,114 @@
+{% comment %} <!DOCTYPE html>
+<html>
+<head>
+    <title>Thesis List</title>
+</head>
+<body>
+    <h1>Thesis List</h1>
+    {% for thesis in page_obj %}
+        <div>
+            <h2><a href="{% url 'thesis_detail' thesis.pk %}">{{ thesis.title }}</a></h2>
+            <p>{{ thesis.author }} - {{ thesis.date }}</p>
+            <p>{{ thesis.description|truncatewords:30 }}</p>
+        </div>
+    {% endfor %}
+    <div>
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</body>
+</html> {% endcomment %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Thesis List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            margin: 0;
+        }
+        .container {
+            padding: 20px;
+        }
+        .thesis {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .thesis h2 {
+            margin: 0 0 10px;
+            color: #333;
+        }
+        .thesis p {
+            margin: 0 0 5px;
+            color: #666;
+        }
+        .step-links {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .step-links a {
+            text-decoration: none;
+            margin: 0 5px;
+            padding: 5px 10px;
+            background-color: #333;
+            color: #fff;
+            border-radius: 3px;
+        }
+        .step-links .current {
+            padding: 5px 10px;
+            background-color: #333;
+            color: #fff;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Thesis List</h1>
+    <div class="container">
+        {% for thesis in page_obj %}
+            <div class="thesis">
+                <h2><a href="{% url 'thesis_detail' thesis.pk %}">{{ thesis.title }}</a></h2>
+                <p>{{ thesis.author }} - {{ thesis.date }}</p>
+                <p>{{ thesis.description|truncatewords:30 }}</p>
+            </div>
+        {% endfor %}
+        <div class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
